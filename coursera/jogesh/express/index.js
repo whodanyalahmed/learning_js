@@ -2,8 +2,8 @@ const express = require('express')
 const http = require('http')
 
 const dishRouter = require('./routes/dishRouter')
-const dishId = require('./routes/dishId')
-
+const promoRouter = require("./routes/promoRouter")
+const leaderRouter = require('./routes/leaderRouter')
 const bodyPraser =require('body-parser')
 const morgan = require('morgan')
 
@@ -15,8 +15,8 @@ app.use(morgan('dev'));
 app.use(bodyPraser.json());
 
 app.use('/dishes',dishRouter);
-
-app.use('/dishes/:dishID',dishId);
+app.use('/promotions',promoRouter);
+app.use('/leaders',leaderRouter);
 
 app.use(express.static(__dirname + '/public'));
 
