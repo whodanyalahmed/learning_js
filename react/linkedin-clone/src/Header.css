@@ -1,0 +1,24 @@
+.header{ 
+   display:flex;
+}
+.header__left{
+    display:flex;
+
+}
+
+.header__search{
+    display:flex;
+    align-items: center;
+    padding:10px;
+    border-radius: 10px;
+    color:gray;
+    height:25px;
+    background:#eef3f8;
+}
+
+
+.header__search > input{
+    border:none;
+    background:#eef3f8;
+    outline:none;
+}
