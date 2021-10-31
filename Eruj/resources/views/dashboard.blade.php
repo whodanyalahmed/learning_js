@@ -72,12 +72,24 @@ ageV=document.getElementById('agebox').value;
 workV=document.getElementById('workbox').value;
         console.log(nameV)
         console.log(fnameV)
-        firebase.database().ref('employ').push().set({
-            employnamnpme:nameV,
-            fname:fnameV,
-            age:ageV,
-            workingarea:workV,
-        });
+        try {
+            
+            firebase.database().ref('employ').push().set({
+                employnamnpme:nameV,
+                fname:fnameV,
+                age:ageV,
+                workingarea:workV,
+            });
+        } catch (error) {
+            alert("cant insert the data...")
+        }
+        finally{
+            
+        nameV=document.getElementById('namebox').value = "";
+        fnameV=document.getElementById('fnamebox').value ="";
+        ageV=document.getElementById('agebox').value = "";
+        workV=document.getElementById('workbox').value ="";
+        }
     }
     // document.getElementById('insert').onclick=function(){
     //     DOMRectReadOnly();
