@@ -59,7 +59,7 @@ workingarea <input id="workbox" type ="text" ><br>
 
 <h1>All data: </h1>
 
-<table id="myTable" class="display">
+<table id="myTable" >
     <thead>
         <tr>
             <th>Full name</th>
@@ -105,9 +105,9 @@ starCountRef.on('value', (snapshot) => {
         name = data[item]['employerName']
         fname = data[item]['fname']
         workingarea = data[item]['workingarea']
-        updateBTN = "<button class='btn btn-primary' data-id="+id+"></button>"
-        updateBTN = "<button class='btn btn-danger' data-id="+id+"></button>"
-        value.push([age,name,fname,workingarea,])
+        updateBTN = "<button class='btn btn-primary' data-id="+id+">update</button>"
+        deleteBTN = "<button class='btn btn-danger' data-id="+id+">delete</button>"
+        value.push([age,name,fname,workingarea,updateBTN,deleteBTN])
         key.push(id)
 
   }
