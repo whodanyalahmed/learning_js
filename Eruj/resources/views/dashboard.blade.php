@@ -112,10 +112,10 @@ workingarea <input id="workbox" type ="text" ><br>
         <button type="button" class="btn btn-dark" data-mdb-dismiss="modal">
           Close
         </button>
-        <form >
+        
             <input type="hidden" name="id" id="id" value="">
-            <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
+            <button onclick="deleteData()" class="btn btn-danger">Delete</button>
+        
       </div>
     </div>
   </div>
@@ -128,8 +128,15 @@ workingarea <input id="workbox" type ="text" ><br>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 <script id="mainscript">
 
-
-    function update(id,name) {
+    function deleteData() {
+        id = document.getElementById('id').value;
+        console.log(id)
+        firebase.database().ref('employ/' + id).remove();
+        
+        $('#exampleModal').modal('toggle');
+        
+    }
+    function updateNDelete(id,name) {
         // alert(id)
         document.getElementById('id').value = id;
         document.getElementById('data').innerHTML = id;
@@ -165,7 +172,7 @@ starCountRef.on('value', (snapshot) => {
         fname = data[item]['fname']
         workingarea = data[item]['workingarea']
         updateBTN = "<button class='btn btn-primary'  data-id="+id+">update</button>"
-        deleteBTN = `<button class='btn btn-danger' onclick='update("`+id+`","`+name+`")' data-id=`+id+` >delete</button>`
+        deleteBTN = `<button class='btn btn-danger' onclick='updateNDelete("`+id+`","`+name+`")' data-id=`+id+` >delete</button>`
         value.push([name,fname,age,workingarea,updateBTN,deleteBTN])
         key.push(id)
 
