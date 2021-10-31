@@ -68,8 +68,6 @@
       </section>
 
 
-
-
       <script>
           
           function CheckIfUserExist(){

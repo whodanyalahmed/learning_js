@@ -55,15 +55,71 @@ workingarea <input id="workbox" type ="text" ><br>
     </div>
 </div>
 
+
+
+<h1>All data: </h1>
+
+<table id="myTable" class="display">
+    <thead>
+        <tr>
+            <th>Full name</th>
+            <th>Father Name</th>
+            <th>Phone</th>
+            <th>Working Area</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+</table>
 </div>
 
 
+
+<script src="{{asset('js/firebase.js')}}"></script>
 <!-- //ready data -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 <script id="mainscript">
 var nameV,fnameV,ageV,workV;
 // function Ready(){
 // }
-// //insert work//
+// // //insert work//
+var starCountRef = firebase.database().ref('employ');
+starCountRef.on('value', (snapshot) => {
+  const data = snapshot.val();
+  StrData = JSON.stringify(data);
+  jsonData = JSON.parse(StrData);
+
+  console.log(data)
+  
+
+  var key = [];
+  var value = [];
+  for (const item in data) {
+        id = item;
+        age = data[item]['age']
+        name = data[item]['employerName']
+        fname = data[item]['fname']
+        workingarea = data[item]['workingarea']
+        updateBTN = "<button class='btn btn-primary' data-id="+id+"></button>"
+        updateBTN = "<button class='btn btn-danger' data-id="+id+"></button>"
+        value.push([age,name,fname,workingarea,])
+        key.push(id)
+
+  }
+  console.log(key)
+  console.log(value)
+
+  $('#myTable').DataTable({
+    data : value
+});
+});
+
+
     function insertValue(){
         
 nameV=document.getElementById('namebox').value;
@@ -75,7 +131,7 @@ workV=document.getElementById('workbox').value;
         try {
             
             firebase.database().ref('employ').push().set({
-                employnamnpme:nameV,
+                employerName:nameV,
                 fname:fnameV,
                 age:ageV,
                 workingarea:workV,
