@@ -76,7 +76,50 @@ workingarea <input id="workbox" type ="text" ><br>
 </table>
 </div>
 
+<!-- Button trigger modal -->
+{{-- <button
+  type="button"
+  class="btn btn-primary"
+  data-mdb-toggle="modal"
+  data-mdb-target="#exampleModal"
+>
+  Launch demo modal
+</button> --}}
 
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm delete?</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+          Do you really want to delete <span id="data" class="fw-bolder"></span> with name:  <span id="name" class="fw-bolder"></span> ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-mdb-dismiss="modal">
+          Close
+        </button>
+        <form >
+            <input type="hidden" name="id" id="id" value="">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="{{asset('js/firebase.js')}}"></script>
 <!-- //ready data -->
@@ -84,6 +127,22 @@ workingarea <input id="workbox" type ="text" ><br>
   
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 <script id="mainscript">
+
+
+    function update(id,name) {
+        // alert(id)
+        document.getElementById('id').value = id;
+        document.getElementById('data').innerHTML = id;
+        document.getElementById('name').innerHTML = name;
+
+        $('#exampleModal').modal('toggle');
+
+    }
+
+
+
+
+
 var nameV,fnameV,ageV,workV;
 // function Ready(){
 // }
@@ -105,8 +164,8 @@ starCountRef.on('value', (snapshot) => {
         name = data[item]['employerName']
         fname = data[item]['fname']
         workingarea = data[item]['workingarea']
-        updateBTN = "<button class='btn btn-primary' data-id="+id+">update</button>"
-        deleteBTN = "<button class='btn btn-danger' data-id="+id+">delete</button>"
+        updateBTN = "<button class='btn btn-primary'  data-id="+id+">update</button>"
+        deleteBTN = `<button class='btn btn-danger' onclick='update("`+id+`","`+name+`")' data-id=`+id+` >delete</button>`
         value.push([name,fname,age,workingarea,updateBTN,deleteBTN])
         key.push(id)
 
@@ -115,7 +174,8 @@ starCountRef.on('value', (snapshot) => {
   console.log(value)
 
 datatable = $('#myTable').DataTable({
-    data : value
+    data : value,
+    "bDestroy": true
 });
 datatable.clear().rows.add(value).draw();
 });
