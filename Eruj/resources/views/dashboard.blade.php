@@ -107,16 +107,17 @@ starCountRef.on('value', (snapshot) => {
         workingarea = data[item]['workingarea']
         updateBTN = "<button class='btn btn-primary' data-id="+id+">update</button>"
         deleteBTN = "<button class='btn btn-danger' data-id="+id+">delete</button>"
-        value.push([age,name,fname,workingarea,updateBTN,deleteBTN])
+        value.push([name,fname,age,workingarea,updateBTN,deleteBTN])
         key.push(id)
 
   }
   console.log(key)
   console.log(value)
 
-  $('#myTable').DataTable({
+datatable = $('#myTable').DataTable({
     data : value
 });
+datatable.clear().rows.add(value).draw();
 });
 
 
