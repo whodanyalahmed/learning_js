@@ -87,34 +87,21 @@
                     if(emailF == email && passF == password){
                         console.log('success: logged in...')
 
-                        // $.ajax({
-                        //     type: 'POST',
-                        //     url: 'dashboard',
-                        //     data: $("#userform").serialize()
-
-                        // })
-                        // .done(function(data){
-                        //     // show the response
-                        //     console.log('successfully session set');
-                            
-                        // })
-                        // .fail(function() {
-                        //     // just in case posting your form failed
-                        //     alert( "Posting failed." );
-                        // });
                         $.ajax({
-                         type: 'POST',
-                          url: 'dashboard',
-                          data: $("#userform").serialize(), // serializes the form's elements.
-                          success:function(response){
-                            console.log('successfully session set');
-                            window.location.replace("/dashboard");
-                          },
-                          error:function(requestObject){
-                            alert( "Posting failed." );
+                            type: 'POST',
+                            url: 'dashboard',
+                            data: $("#userform").serialize()
 
-                          }
-                          });
+                        })
+                        .done(function(data){
+                            // show the response
+                            console.log('successfully session set');
+                            
+                        })
+                        .fail(function() {
+                            // just in case posting your form failed
+                            alert( "Posting failed." );
+                        });
 
                     }
 

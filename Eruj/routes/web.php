@@ -14,11 +14,39 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    if(session()->has('user')){
+        return redirect('dashboard');
+    }
+    
     return view('welcome');
+    
 });
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/dashboard', [App\Http\Controllers\HomeController::class, 'CreateSession']);
-Route::view('dashboard','dashboard');
+Route::post('/dashboard', [App\Http\Controllers\User::class, 'CreateSession']);
+Route::get('/dashboard',function(){
+    if(!(session()->has('user'))){
+        
+        return redirect('/');;
+    }
+    return view('dashboard');
+    
+});
+
+Route::get('/logout',function(Request $request){
+    if(session()->has('user')){
+        // session()->pull('user');
+        session()->forget('user');
+    }
+    return redirect('/');
+});
+
+Route::get('/login',function(){
+    if(session()->has('user')){
+        return redirect('dashboard');
+    }
+    
+    return view('login');
+   
+});

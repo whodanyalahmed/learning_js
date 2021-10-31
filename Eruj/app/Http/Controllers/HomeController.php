@@ -26,9 +26,5 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function CreateSession(Request $req){
-        echo $req->input('email');
-        $request->session()->put('user', $req->input('email'));
-        return redirect('dashboard');
-    }
+
 }
