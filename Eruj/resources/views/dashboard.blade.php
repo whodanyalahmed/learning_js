@@ -86,7 +86,7 @@ workingarea <input id="workbox" type ="text" ><br>
   Launch demo modal
 </button> --}}
 
-<!-- Modal -->
+<!-- Delete Modal -->
 <div
   class="modal fade"
   id="exampleModal"
@@ -120,6 +120,55 @@ workingarea <input id="workbox" type ="text" ><br>
     </div>
   </div>
 </div>
+<!-- Delete Modal -->
+<div
+  class="modal fade"
+  id="updateModal"
+  tabindex="-1"
+  aria-labelledby="updateModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalLabel">Update</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-outline mb-4">
+          <input type="text" class="form-control" id="updatename" name="updatename">
+          <label for="updatename" class="form-label">Name </label>
+        </div>
+        <div class="form-outline mb-4">
+          <input type="text" class="form-control" id="updatefname" name="updatefname">
+          <label for="updatefname" class="form-label">Father Name </label>
+        </div>
+        <div class="form-outline mb-4">
+          <input type="number" class="form-control" id="updateAge" name="updateAge">
+          <label for="updateAge" class="form-label">Age </label>
+        </div>
+        <div class="form-outline ">
+          <input type="text" class="form-control" id="updateWorkingArea" name="updateWorkingArea">
+          <label for="updateWorkingArea" class="form-label">Working Area</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-mdb-dismiss="modal">
+          Close
+        </button>
+
+            <input type="hidden" name="id" id="updateid" value="">
+            <button onclick="updateNewData()" class="btn btn-secondary">update</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="{{asset('js/firebase.js')}}"></script>
 <!-- //ready data -->
@@ -133,9 +182,10 @@ workingarea <input id="workbox" type ="text" ><br>
         console.log(id)
         firebase.database().ref('employ/' + id).remove();
         
-        $('#exampleModal').modal('toggle');
+        $('#exampleModal').modal('toggle');  
         
     }
+
     function updateNDelete(id,name) {
         // alert(id)
         document.getElementById('id').value = id;
@@ -145,7 +195,40 @@ workingarea <input id="workbox" type ="text" ><br>
         $('#exampleModal').modal('toggle');
 
     }
+    function updateData(id,name,fname,age,workingarea) {
+        // alert(id)
+        document.getElementById('updateid').value = id;
+        // document.getElementById('updatedata').innerHTML = id;
+        document.getElementById('updatename').value = name;
+        document.getElementById('updatefname').value = fname;
+        document.getElementById('updateAge').value = age;
+        document.getElementById('updateWorkingArea').value = workingarea;
 
+        $('#updateModal').modal('toggle');
+
+    }
+    function updateNewData() {
+        id = document.getElementById('updateid').value;
+        console.log(id)
+        // firebase.database().ref('employ/' + id).remove();
+        name = document.getElementById('updatename').value
+        fname = document.getElementById('updatefname').value
+        age = document.getElementById('updateAge').value
+        workingArea = document.getElementById('updateWorkingArea').value
+        console.log(name)
+        console.log(workingArea)
+        ref = firebase.database().ref('employ').child(id)
+        // .child('employerName').setValue(name)
+        ref.update({
+          employerName:name,
+          fname:fname,
+          age:age,
+          workingarea:workingArea,
+      });
+          
+        $('#updateModal').modal('toggle');  
+        
+    }
 
 
 
@@ -171,8 +254,8 @@ starCountRef.on('value', (snapshot) => {
         name = data[item]['employerName']
         fname = data[item]['fname']
         workingarea = data[item]['workingarea']
-        updateBTN = "<button class='btn btn-primary'  data-id="+id+">update</button>"
-        deleteBTN = `<button class='btn btn-danger' onclick='updateNDelete("`+id+`","`+name+`")' data-id=`+id+` >delete</button>`
+        updateBTN = `<button class='btn btn-primary' onclick='updateData("`+id+`","`+name+`","`+fname+`","`+age+`","`+workingarea+`")'  data-id=`+id+`>update</button>`;
+        deleteBTN = `<button class='btn btn-danger' onclick='updateNDelete("`+id+`","`+name+`")' data-id=`+id+` >delete</button>`;
         value.push([name,fname,age,workingarea,updateBTN,deleteBTN])
         key.push(id)
 
