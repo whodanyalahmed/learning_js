@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @section('title')
-    Dustibins
+    Collection
 @endsection
 
 
