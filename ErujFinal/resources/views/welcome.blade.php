@@ -15,28 +15,35 @@
     }
     </style>
     {{-- login UI --}}
+    
     <section class="vh-100">
 
         <div class="container py-5 h-100">
+          
+          <div id="wrong">
+
+          </div>
             <div class="row d-flex align-items-center justify-content-center h-100">
             <div class="col-md-8 col-lg-7 col-xl-6">
-              <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Phone image">
+              {{-- <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Phone image">
+               --}}
+               <img src="img/trash.svg " width="560vw" alt="trash and guy" >
             </div>
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 ">
                 <h1 class="fw-bolder mt-5 text-center "><i>Login !</i> </h1>
               
                 
-              <form id="userform">x
+              <form id="userform">
                 @csrf
                 <!-- Email input -->
                 <div class="form-outline mb-4 mt-lg-4 mt-sm-4">
-                  <input type="email" id="form1Example13" class="form-control form-control-lg" name="email" />
+                  <input type="email" id="form1Example13" class="form-control form-control-lg" name="email" autocomplete="email"/>
                   <label class="form-label" for="form1Example13">Email address</label>
                 </div>
       
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                  <input type="password" id="form1Example23" class="form-control form-control-lg" name="pass" />
+                  <input type="password" current-password id="form1Example23" class="form-control form-control-lg" name="pass" autocomplete="current-password"/>
                   <label class="form-label" for="form1Example23">Password</label>
                 </div>
       
@@ -56,7 +63,7 @@
                 </div>
       
                 <!-- Submit button -->
-                <button onclick="return CheckIfUserExist()" class="btn btn-primary btn-lg btn-block">Sign in</button>
+                <button onclick="return CheckIfUserExist()" class="btn btn-success btn-lg btn-block">Sign in</button>
       
               </form>
               
@@ -66,6 +73,8 @@
           </div>
         </div>
       </section>
+
+
 
 
       <script>
@@ -85,38 +94,31 @@
                     if(emailF == email && passF == password){
                         console.log('success: logged in...')
 
-                        // $.ajax({
-                        //     type: 'POST',
-                        //     url: 'dashboard',
-                        //     data: $("#userform").serialize()
-
-                        // })
-                        // .done(function(data){
-                        //     // show the response
-                        //     console.log('successfully session set');
-                            
-                        // })
-                        // .fail(function() {
-                        //     // just in case posting your form failed
-                        //     alert( "Posting failed." );
-                        // });
                         $.ajax({
-                         type: 'POST',
-                          url: 'dashboard',
-                          data: $("#userform").serialize(), // serializes the form's elements.
-                          success:function(response){
+                            type: 'POST',
+                            url: 'dashboard',
+                            data: $("#userform").serialize()
+
+                        })
+                        .done(function(data){
+                            // show the response
                             console.log('successfully session set');
-                            window.location.replace("/dashboard");
-                          },
-                          error:function(requestObject){
+                            window.location.replace("/dashboard");  
+                            
+                        })
+                        .fail(function() {
+                            // just in case posting your form failed
                             alert( "Posting failed." );
-
-                          }
-                          });
-
+                        });
+                        return 0;
                     }
 
                 }
+                document.getElementById('wrong').innerHTML =  `<div class="alert alert-dismissible fade show alert-danger rounded  "  role="alert" data-mdb-color="danger">
+                  <i class="fas fa-times-circle me-3"></i>
+            <strong>Wrong! email or password</strong>...Please try again...
+            <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+          </div>`;
                 
               });
               return false;

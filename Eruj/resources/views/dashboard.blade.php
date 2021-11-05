@@ -56,7 +56,7 @@ workingarea <input id="workbox" type ="text" ><br>
     <div class="row">
         <div class="col">
 
-            <button class="btn btn-primary btn-block mb-4" onclick="insertValue()">Insert</button>
+            <button class="btn btn-outline-success btn-rounded btn-block mb-4" onclick="insertValue()">Insert</button>
         </div>
     </div>
 </div>
@@ -117,12 +117,12 @@ workingarea <input id="workbox" type ="text" ><br>
           Do you really want to delete <span id="data" class="fw-bolder"></span> with name:  <span id="name" class="fw-bolder"></span> ?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-mdb-dismiss="modal">
+        <button type="button" class="btn btn-dark btn-rounded" data-mdb-dismiss="modal">
           Close
         </button>
         
             <input type="hidden" name="id" id="id" value="">
-            <button onclick="deleteData()" class="btn btn-danger">Delete</button>
+            <button onclick="deleteData()" class="btn btn-outline-danger btn-rounded">Delete</button>
         
       </div>
     </div>
@@ -170,12 +170,12 @@ workingarea <input id="workbox" type ="text" ><br>
         </div> --}}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-mdb-dismiss="modal">
+        <button type="button" class="btn btn-dark  btn-rounded" data-mdb-dismiss="modal">
           Close
         </button>
 
             <input type="hidden" name="id" id="updateid" value="">
-            <button onclick="updateNewData()" class="btn btn-secondary">update</button>
+            <button onclick="updateNewData()" class="btn btn-outline-success btn-rounded">update</button>
         
       </div>
     </div>
@@ -270,8 +270,8 @@ starCountRef.on('value', (snapshot) => {
         fname = data[item]['fname']
         workingarea = data[item]['workingarea']
         rfid = data[item]['rfid']
-        updateBTN = `<button class='btn btn-primary' onclick='updateData("`+id+`","`+name+`","`+fname+`","`+phone+`","`+workingarea+`")'  data-id=`+id+`>update</button>`;
-        deleteBTN = `<button class='btn btn-danger' onclick='updateNDelete("`+id+`","`+name+`")' data-id=`+id+` >delete</button>`;
+        updateBTN = `<button class='btn btn-success btn-rounded' onclick='updateData("`+id+`","`+name+`","`+fname+`","`+phone+`","`+workingarea+`")'  data-id=`+id+`>update</button>`;
+        deleteBTN = `<button class='btn btn-danger btn-rounded' onclick='updateNDelete("`+id+`","`+name+`")' data-id=`+id+` >delete</button>`;
         value.push([id,name,fname,phone,workingarea,rfid,updateBTN,deleteBTN])
         key.push(id)
 

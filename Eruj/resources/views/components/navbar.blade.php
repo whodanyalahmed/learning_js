@@ -18,15 +18,15 @@
       <!-- Collapsible wrapper -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Navbar brand -->
-        <a class="navbar-brand mt-2 mt-lg-0  fs-4 fw-bold"  href="#">
+        <a class="navbar-brand mt-2 mt-lg-0  fs-4 fw-bold"  href="/">
           {{-- <img
             src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"
             height="15"
             alt=""
             loading="lazy"
           /> --}}
-          
-          <abbr title="Garbage Management System">GMS</abbr> 
+         
+          <span title="Garbage Management System" class="text-success ms-5">Solid Waste Management System <span> 
         </a>
         <!-- Left links -->
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -96,7 +96,7 @@
             alt=""
             loading="lazy"
           /> --}}
-          <span class="bg-dark " style="border-radius: 100px;padding:8px 13px;"><i class="far fa-user text-white"></i></span>
+          <span class="bg-success " style="border-radius: 100px;padding:8px 13px;"><i class="far fa-user text-white"></i></span>
         </a>
         <ul
           class="dropdown-menu dropdown-menu-end"
