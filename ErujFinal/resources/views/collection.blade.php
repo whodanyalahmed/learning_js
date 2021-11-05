@@ -79,7 +79,7 @@ starCountRef.on('value', (snapshot) => {
         DustbinArea = data[item]['Area']
         DateTime = data[item]['DateTime']
         rfid = data[item]['RFID']
-        dustbinID = data[item]['dustbinID']]
+        dustbinID = data[item]['dustbinID']
         // updateBTN = `<button class='btn btn-primary' onclick='updateData("`+id+`","`+name+`","`+DustbinLocation+`","`+DustbinArea+`","`+dustbinID+`")'  data-id=`+id+`>update</button>`;
         // deleteBTN = `<button class='btn btn-danger' onclick='updateNDelete("`+id+`","`+name+`")' data-id=`+id+` >delete</button>`;
         value.push([rfid,dustbinID,DustbinArea,DateTime])
