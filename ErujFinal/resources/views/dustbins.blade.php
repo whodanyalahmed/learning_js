@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @section('title')
-    Dashboard
+    Dustibins
 @endsection
 
 
@@ -8,48 +8,43 @@
 @section('content')
 
 {{-- name <input id="namebox" type ="text" ><br>
-fname <input id="fnamebox" type ="text" ><br>
-phone <input id="phonebox" type ="text" ><br>
-workingarea <input id="workbox" type ="text" ><br>
+fname <input id="dustbinLocation" type ="text" ><br>
+age <input id="DustbinArea" type ="text" ><br>
+workingarea <input id="DustbinId" type ="text" ><br>
 <br>
 <button id="insert" onclick="insertValue()">INSERT</button>
 <button id="select">SELECT</button>
 <button id="update">UPDATE</button>
 <button id="delete">DELETE</button> --}}
 <div class="container mt-5 ">
-<h1>Add data to form: </h1>
+<h1>Add Dustbin: </h1>
 <div class="container mt-3 mx-3">
     <!-- 2 column grid layout with text inputs for the first and last names -->
     <div class="row mb-4">
       <div class="col">
         <div class="form-outline">
           <input type="text" id="namebox" class="form-control" />
-          <label class="form-label" for="namebox">Full name </label>
+          <label class="form-label" for="namebox">Dustbin title </label>
         </div>
       </div>
       <div class="col">
         <div class="form-outline">
-          <input type="text" id="fnamebox" class="form-control" />
-          <label class="form-label" for="fnamebox">Father name </label>
+          <input type="text" id="dustbinLocation" class="form-control" />
+          <label class="form-label" for="dustbinLocation">Dustbin location</label>
         </div>
       </div>
     </div>
   
     <!-- Number input -->
     <div class="form-outline mb-4">
-        <input type="number" id="phonebox" class="form-control" />
-        <label class="form-label" for="phonebox">Phone </label>
+        <input type="text" id="DustbinArea" class="form-control" />
+        <label class="form-label" for="DustbinArea">Dustbin area </label>
       </div>
-    <!-- Text input -->
+    <!-- Number input -->
     <div class="form-outline mb-4">
-      <input type="text" id="workbox" class="form-control" />
-      <label class="form-label" for="workbox">Working area </label>
-    </div>
-  
-    <div class="form-outline mb-4">
-      <input type="text" id="rfidbox" class="form-control" />
-      <label class="form-label" for="rfidbox">RFID </label>
-    </div>
+        <input type="number" id="dustbinID" class="form-control" />
+        <label class="form-label" for="dustbinID">Dustbin ID </label>
+      </div>
   
   
     <!-- Submit button -->
@@ -68,12 +63,11 @@ workingarea <input id="workbox" type ="text" ><br>
 <table id="myTable" >
     <thead>
         <tr>
-            <th>ID</th>
             <th>Full name</th>
-            <th>Father Name</th>
-            <th>Phone</th>
-            <th>Working Area</th>
-            <th>RFID</th>
+            <th>Dustbin Location</th>
+            <th>Dustbin Area</th>
+            <th>Dustbin Id</th>
+            <th>Dustbin Percentage</th>
             <th>Update</th>
             <th>Delete</th>
         </tr>
@@ -153,21 +147,17 @@ workingarea <input id="workbox" type ="text" ><br>
           <label for="updatename" class="form-label">Name </label>
         </div>
         <div class="form-outline mb-4">
-          <input type="text" class="form-control" id="updatefname" name="updatefname">
-          <label for="updatefname" class="form-label">Father Name </label>
+          <input type="text" class="form-control" id="updateDustbinLocation" name="updateDustbinLocation">
+          <label for="updateDustbinLocation" class="form-label">Dustbin Location </label>
         </div>
         <div class="form-outline mb-4">
-          <input type="number" class="form-control" id="updatephone" name="updatephone">
-          <label for="updatephone" class="form-label">phone </label>
+          <input type="text" class="form-control" id="updateDustbinArea" name="updateDustbinArea">
+          <label for="updateDustbinArea" class="form-label">Dustbin Area </label>
         </div>
         <div class="form-outline ">
-          <input type="text" class="form-control" id="updateWorkingArea" name="updateWorkingArea">
-          <label for="updateWorkingArea" class="form-label">Working Area</label>
+          <input type="text" class="form-control" id="updateDustbinId" name="updateDustbinId">
+          <label for="updateDustbinId" class="form-label">Dustbin Id</label>
         </div>
-        {{-- <div class="form-outline ">
-          <input type="text" class="form-control" id="updaterfid" name="updaterfid">
-          <label for="updaterfid" class="form-label">RFID</label>
-        </div> --}}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-dark" data-mdb-dismiss="modal">
@@ -192,7 +182,7 @@ workingarea <input id="workbox" type ="text" ><br>
     function deleteData() {
         id = document.getElementById('id').value;
         console.log(id)
-        firebase.database().ref('employ/' + id).remove();
+        firebase.database().ref('dustbin/' + id).remove();
         
         $('#exampleModal').modal('toggle');  
         
@@ -207,15 +197,14 @@ workingarea <input id="workbox" type ="text" ><br>
         $('#exampleModal').modal('toggle');
 
     }
-    function updateData(id,name,fname,phone,workingarea) {
+    function updateData(id,name,DustbinLocation,DustbinArea,DustbinId) {
         // alert(id)
         document.getElementById('updateid').value = id;
         // document.getElementById('updatedata').innerHTML = id;
         document.getElementById('updatename').value = name;
-        document.getElementById('updatefname').value = fname;
-        document.getElementById('updatephone').value = phone;
-        document.getElementById('updateWorkingArea').value = workingarea;
-        // document.getElementById('updaterfid').value = id;
+        document.getElementById('updateDustbinLocation').value = DustbinLocation;
+        document.getElementById('updateDustbinArea').value = DustbinArea;
+        document.getElementById('updateDustbinId').value = DustbinId;
 
         $('#updateModal').modal('toggle');
 
@@ -223,22 +212,20 @@ workingarea <input id="workbox" type ="text" ><br>
     function updateNewData() {
         id = document.getElementById('updateid').value;
         console.log(id)
-        // firebase.database().ref('employ/' + id).remove();
+        // firebase.database().ref('dustbin/' + id).remove();
         name = document.getElementById('updatename').value
-        fname = document.getElementById('updatefname').value
-        phone = document.getElementById('updatephone').value
-        workingArea = document.getElementById('updateWorkingArea').value
-        // rfid = document.getElementById('updaterfid').value
+        DustbinLocation = document.getElementById('updateDustbinLocation').value
+        DustbinArea = document.getElementById('updateDustbinArea').value
+        dustbinID = document.getElementById('updateDustbinId').value
         console.log(name)
-        console.log(rfid)
-        ref = firebase.database().ref('employ').child(id)
+        console.log(dustbinID)
+        ref = firebase.database().ref('dustbin').child(id)
         // .child('employerName').setValue(name)
         ref.update({
-          employerName:name,
-          fname:fname,
-          phone:phone,
-          workingarea:workingArea,
-          // rfid: rfid
+            DustbinName:name,
+                DustbinLocation:DustbinLocation,
+                DustbinArea:DustbinArea,
+                dustbinID:dustbinID,
       });
           
         $('#updateModal').modal('toggle');  
@@ -248,11 +235,11 @@ workingarea <input id="workbox" type ="text" ><br>
 
 
 
-var nameV,fnameV,phoneV,workV;
+// var nameV,fnameV,ageV,workV;
 // function Ready(){
 // }
 // // //insert work//
-var starCountRef = firebase.database().ref('employ');
+var starCountRef = firebase.database().ref('dustbin');
 starCountRef.on('value', (snapshot) => {
   const data = snapshot.val();
   StrData = JSON.stringify(data);
@@ -265,14 +252,14 @@ starCountRef.on('value', (snapshot) => {
   var value = [];
   for (const item in data) {
         id = item;
-        phone = data[item]['phone']
-        name = data[item]['employerName']
-        fname = data[item]['fname']
-        workingarea = data[item]['workingarea']
-        rfid = data[item]['rfid']
-        updateBTN = `<button class='btn btn-primary' onclick='updateData("`+id+`","`+name+`","`+fname+`","`+phone+`","`+workingarea+`")'  data-id=`+id+`>update</button>`;
+        DustbinLocation = data[item]['DustbinLocation']
+        name = data[item]['DustbinName']
+        dustbinID = data[item]['dustbinID']
+        DustbinArea = data[item]['DustbinArea']
+        dustbinPercentage = data[item]['dustbinPercentage']
+        updateBTN = `<button class='btn btn-primary' onclick='updateData("`+id+`","`+name+`","`+DustbinLocation+`","`+DustbinArea+`","`+dustbinID+`")'  data-id=`+id+`>update</button>`;
         deleteBTN = `<button class='btn btn-danger' onclick='updateNDelete("`+id+`","`+name+`")' data-id=`+id+` >delete</button>`;
-        value.push([id,name,fname,phone,workingarea,rfid,updateBTN,deleteBTN])
+        value.push([name,DustbinLocation,DustbinArea,dustbinID,dustbinPercentage,updateBTN,deleteBTN])
         key.push(id)
 
   }
@@ -290,39 +277,37 @@ datatable.clear().rows.add(value).draw();
     function insertValue(){
         
 nameV=document.getElementById('namebox').value;
-id=document.getElementById('rfidbox').value;
-fnameV=document.getElementById('fnamebox').value;
-phoneV=document.getElementById('phonebox').value;
-workV=document.getElementById('workbox').value;
+dlocation=document.getElementById('dustbinLocation').value;
+darea=document.getElementById('DustbinArea').value;
+did=document.getElementById('dustbinID').value;
         console.log(nameV)
-        console.log(fnameV)
+        console.log(dlocation)
         try {
             
-            firebase.database().ref('employ').child(id).set({
-                employerName:nameV,
-                fname:fnameV,
-                phone:phoneV,
-                workingarea:workV,
-                rfid: id
+            firebase.database().ref('dustbin').push().set({
+                DustbinName:nameV,
+                DustbinLocation:dlocation,
+                DustbinArea:darea,
+                dustbinID:did,
+                dustbinPercentage : 0,
             });
         } catch (error) {
             alert("cant insert the data...")
         }
         finally{
             
-        nameV=document.getElementById('namebox').value = "";
-        fnameV=document.getElementById('fnamebox').value ="";
-        phoneV=document.getElementById('phonebox').value = "";
-        workV=document.getElementById('workbox').value ="";
-        workV=document.getElementById('rfidbox').value ="";
+        document.getElementById('namebox').value = "";
+        document.getElementById('dustbinLocation').value ="";
+        document.getElementById('DustbinArea').value = "";
+        document.getElementById('dustbinID').value ="";
         }
     }
     // document.getElementById('insert').onclick=function(){
     //     DOMRectReadOnly();
-    //     firebase.database().ref('employ/'+rollV.set({
+    //     firebase.database().ref('dustbin/'+rollV.set({
     //         employnamnpme:nameV,
     //         fname:fnameV,
-    //         phone:phoneV,
+    //         age:ageV,
     //         workingarea:work,
     //     });
 
